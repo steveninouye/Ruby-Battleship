@@ -19,6 +19,8 @@ class BattleshipGame
   end
 
   def play_turn
+    x = @player.get_play
+    attack(x)
   end
 
 end
