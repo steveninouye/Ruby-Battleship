@@ -23,4 +23,7 @@ class BattleshipGame
     attack(x)
   end
 
+  def display_status
+    @board.grid.each {|row| p row }
+  end
 end
