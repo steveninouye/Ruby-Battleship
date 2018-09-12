@@ -25,30 +25,30 @@ describe BattleshipGame do
     end
   end
 
-  # describe "#count" do
-  #   it "delegates to the board's #count method" do
-  #     expect(game.board).to receive(:count)
+  describe "#count" do
+    it "delegates to the board's #count method" do
+      expect(game.board).to receive(:count)
 
-  #     game.count
-  #   end
-  # end
+      game.count
+    end
+  end
 
-  # describe "#game_over?" do
-  #   it "delegates to the board's #won? method" do
-  #     expect(game.board).to receive(:won?)
+  describe "#game_over?" do
+    it "delegates to the board's #won? method" do
+      expect(game.board).to receive(:won?)
 
-  #     game.game_over?
-  #   end
-  # end
+      game.game_over?
+    end
+  end
 
-  # describe "#play_turn" do
-  #   it "gets a move from the player and makes an attack at that position" do
-  #     allow(player).to receive(:get_play).and_return([1, 1])
+  describe "#play_turn" do
+    it "gets a move from the player and makes an attack at that position" do
+      allow(player).to receive(:get_play).and_return([1, 1])
 
-  #     expect(player).to receive(:get_play)
-  #     expect(game).to receive(:attack).with([1, 1])
+      expect(player).to receive(:get_play)
+      expect(game).to receive(:attack).with([1, 1])
 
-  #     game.play_turn
-  #   end
-  # end
+      game.play_turn
+    end
+  end
 end
