@@ -1,3 +1,6 @@
+require "./player.rb"
+require "./board.rb"
+
 class BattleshipGame
   attr_reader :board, :player
 
@@ -7,6 +10,7 @@ class BattleshipGame
   end
 
   def play
+    @board.place_random_ship
     until game_over?
       display_status
       play_turn
@@ -14,6 +18,8 @@ class BattleshipGame
   end
 
   def attack(point)
+    p 'attack'
+    p point
     board[point] = :x
   end
 
@@ -39,3 +45,7 @@ class BattleshipGame
     attack(x)
   end
 end
+
+game = BattleshipGame.new(HumanPlayer, Board.new)
+
+game.play
