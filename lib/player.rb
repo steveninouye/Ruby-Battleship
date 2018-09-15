@@ -5,13 +5,17 @@ class HumanPlayer
         target = []
         valid_input = false
         until valid_input
-            p "\n\n"
-            p "Target a coordinate"
-            p "('3 4' => targets row 3 column 4)"
+            display_target_directions
             target = input_to_integer_arr(gets.chomp)
             valid_input = input_is_valid?(target)
         end
         target
+    end
+
+    def display_target_directions
+        p "\n\n"
+        p "Target a coordinate"
+        p "('3 4' => targets row 3 column 4)"
     end
 
     def input_to_integer_arr(input)
