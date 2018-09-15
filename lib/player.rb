@@ -5,6 +5,7 @@ class HumanPlayer
         target = []
         valid_input = false
         until valid_input
+            p "\n\n"
             p "Target a coordinate"
             p "('3 4' => targets row 3 column 4)"
             target = input_to_integer_arr(gets.chomp)
