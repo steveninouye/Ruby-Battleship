@@ -18,7 +18,7 @@ class HumanPlayer
         target
     end
 
-    def validate_input(input)
+    def input_to_integer(input)
         
     end
 end
