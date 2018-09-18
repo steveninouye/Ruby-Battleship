@@ -1,5 +1,5 @@
-require "./player.rb"
-require "./board.rb"
+require "player"
+require "board"
 
 class BattleshipGame
   attr_reader :board, :player
