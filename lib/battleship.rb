@@ -1,5 +1,5 @@
-require "player"
-require "board"
+require_relative "./player.rb"
+require_relative "./board.rb"
 
 class BattleshipGame
   attr_reader :board, :player
@@ -45,7 +45,3 @@ class BattleshipGame
     attack(x)
   end
 end
-
-game = BattleshipGame.new(HumanPlayer, Board.new)
-
-game.play

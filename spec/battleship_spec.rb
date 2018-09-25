@@ -1,7 +1,7 @@
 require "rspec"
 require "battleship"
 require "board"
-require "player"
+require "human_player"
 
 describe BattleshipGame do
   let(:two_ship_grid) { [[:s, :s], [nil, nil]] }
