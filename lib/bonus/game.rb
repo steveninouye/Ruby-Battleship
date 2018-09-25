@@ -20,8 +20,9 @@ class Game
 
   def setup
     #get num of rows
+    num_rows = get_num_input(20, "How many rows on the board?")
     #get num columns
-
+    num_columns = get_num_input(20, "How many columns on the board?")
 
     #get the number of players
     num_human_players = get_num_input(10, "How many players will be playing?")
@@ -46,17 +47,18 @@ class Game
     num
   end
 
-  def create_human_players(num)
+  def create_human_players(num, board)
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
-      @players << HumanPlayer.new(gets.chomp)
+      @players << HumanPlayer.new(gets.chomp, board)
     end
   end
 
-  def create_comp_players(num)
+  def create_comp_players(num, board)
     num_human_players.times do |el|
-      puts "Player #{el + 1} name:"
-      @players << ComputerPlayer.new
+      comp_name = "Computer#{el+1}"
+      @players << ComputerPlayer.new(comp_name,board)
+      puts "Computer#{}"
     end
   end
 

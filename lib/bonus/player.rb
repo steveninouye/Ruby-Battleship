@@ -1,6 +1,7 @@
 class Player
 
-  def initialize (board)
+  def initialize (name, board)
+    @name = name
     @board = board
   end
 
