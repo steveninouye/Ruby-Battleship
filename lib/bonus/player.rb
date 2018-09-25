@@ -1,4 +1,5 @@
 class Player
+  attr_reader :name
 
   def initialize (name, board)
     @name = name
@@ -6,11 +7,11 @@ class Player
   end
 
   def count
-    @board.reduce(0) { |arr| arr.count(:s) }
+    @board.reduce(0) { |row| row.count(:s) }
   end
 
   def defeated?
-      count == 0
+    count == 0
   end
     
 end
