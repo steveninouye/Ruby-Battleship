@@ -1,9 +1,17 @@
+require_relative "./board.rb"
+
 class Player
   attr_reader :name
 
   def initialize (name, board)
     @name = name
-    @board = board
+    @board = Board.new(board)
+  end
+
+  def get_atack_coord
+  end
+
+  def attack(coord)
   end
 
   def count

@@ -1,6 +1,5 @@
 require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
-require_relative "./board.rb"
 
 class Game
   # infinite number of players possible
@@ -11,13 +10,7 @@ class Game
   def play
     setup
     until game_over?
-      current_player = @players.unshift
-      #get players attack coordinate
-      #attack all other players
-
-      #find out if any players have been defeated && notify other players
-
-      @players << current_player
+      take_turn
     end
     #diplay winning player
   end
@@ -26,11 +19,27 @@ class Game
     num_rows = get_num_input(20, "How many rows on the board?")
     num_columns = get_num_input(20, "How many columns on the board?")
     board = [num_rows, num_columns]
-    num_human_players = get_num_input(10, "How many players will be playing?")
-    create_human_players(num_human_players, board)
-    num_comp_players = get_num_input(10, "How many computers would you like?")
-    create_comp_players(num_comp_players, board)
+    create_human_players(board)
+    create_comp_players(board)
     shuffle_players
+  end
+
+  def take_turn
+    current_player = @players.unshift
+    puts "#{current_player.name}'s turn"
+    coord = current_player.get_attack_coord
+    attack(coord)
+    @players << current_player
+  end
+
+  def attack(coord)
+    @players.each_with_index do |player,idx|
+      player.attack(coord)
+      if player.defeated?
+        @players.delete_at(idx)
+        puts "#{player.name} was destroyed!"
+      end
+    end
   end
 
   def get_num_input(max, str)
@@ -45,15 +54,17 @@ class Game
     num
   end
 
-  def create_human_players(num, board)
+  def create_human_players(board)
+    num_human_players = get_num_input(10, "How many players will be playing?")
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
       @players << HumanPlayer.new(gets.chomp, Board.new(board))
     end
   end
 
-  def create_comp_players(num, board)
-    num_human_players.times do |el|
+  def create_comp_players(board)
+    num_comp_players = get_num_input(10, "How many computers would you like?")
+    num_comp_players.times do |el|
       comp_name = "Computer#{el+1}"
       @players << ComputerPlayer.new(comp_name, Board.new(board))
       puts "Computer#{}"
@@ -66,6 +77,6 @@ class Game
   end
 
   def game_over?
-    #no ships on one of the boards
+    @player.length == 1
   end
 end
