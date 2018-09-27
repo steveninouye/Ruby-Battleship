@@ -7,7 +7,7 @@ class Player
   end
 
   def count
-    @board.reduce(0) { |row| row.count(:s) }
+    @board.reduce(0) { |a,row| a + row.count(:s) }
   end
 
   def defeated?
