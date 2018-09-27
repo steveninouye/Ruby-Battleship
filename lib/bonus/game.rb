@@ -38,6 +38,7 @@ class Game
     #create computer players
     create_comp_players(num_comp_players, board)
     #scramble order
+    @players = @players.shuffle
   end
 
   def get_num_input(max, str)
