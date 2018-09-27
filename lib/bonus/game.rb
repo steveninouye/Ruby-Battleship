@@ -23,22 +23,14 @@ class Game
   end
 
   def setup
-    #get num of rows
     num_rows = get_num_input(20, "How many rows on the board?")
-    #get num columns
     num_columns = get_num_input(20, "How many columns on the board?")
     board = [num_rows, num_columns]
-
-    #get the number of players
     num_human_players = get_num_input(10, "How many players will be playing?")
-    #create the players
     create_human_players(num_human_players, board)
-    #get num of computer players
     num_comp_players = get_num_input(10, "How many computers would you like?")
-    #create computer players
     create_comp_players(num_comp_players, board)
-    #scramble order
-    @players = @players.shuffle
+    shuffle_players
   end
 
   def get_num_input(max, str)
@@ -66,6 +58,11 @@ class Game
       @players << ComputerPlayer.new(comp_name, Board.new(board))
       puts "Computer#{}"
     end
+  end
+
+  def shuffle_players
+    puts "Shuffling Players"
+    @players = @players.shuffle
   end
 
   def game_over?

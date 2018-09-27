@@ -13,5 +13,4 @@ class Player
   def defeated?
     count == 0
   end
-    
 end
