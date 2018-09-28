@@ -27,14 +27,14 @@ class Game
   def take_turn
     current_player = @players.unshift[0]
     puts "#{current_player.name}'s turn"
-    coord = current_player.get_attack_coord
+    coord = current_player.get_attack
     attack(coord)
     @players << current_player
   end
 
   def attack(coord)
     @players.each_with_index do |player,idx|
-      player.attack(coord)
+      player.post_attack(coord)
       if player.defeated?
         @players.delete_at(idx)
         puts "#{player.name} was destroyed!"

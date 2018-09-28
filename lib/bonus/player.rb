@@ -8,7 +8,7 @@ class Player
     @board = Board.new(board)
   end
 
-  def get_atack_coord
+  def post_attack(coord)
   end
 
   def attack(coord)
