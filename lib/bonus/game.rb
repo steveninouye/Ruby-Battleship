@@ -25,7 +25,7 @@ class Game
   end
 
   def take_turn
-    current_player = @players.unshift
+    current_player = @players.unshift[0]
     puts "#{current_player.name}'s turn"
     coord = current_player.get_attack_coord
     attack(coord)
@@ -79,6 +79,6 @@ class Game
   end
 
   def game_over?
-    @player.length == 1
+    @players.length == 1
   end
 end
