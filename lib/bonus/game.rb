@@ -2,7 +2,7 @@ require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
 
 class Game
-  # infinite number of players possible
+  
   def initialize
     @players = []
   end
@@ -12,7 +12,7 @@ class Game
     until game_over?
       take_turn
     end
-    #diplay winning player
+    puts "#{@players[0].name} is the WINNER!"
   end
 
   def setup
@@ -58,16 +58,18 @@ class Game
     num_human_players = get_num_input(10, "How many players will be playing?")
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
-      @players << HumanPlayer.new(gets.chomp, Board.new(board))
+      player_name = gets.chomp
+      @players << HumanPlayer.new(player_name, Board.new(board))
+      puts "#{player_name} was added"
     end
   end
 
   def create_comp_players(board)
     num_comp_players = get_num_input(10, "How many computers would you like?")
     num_comp_players.times do |el|
-      comp_name = "Computer#{el+1}"
+      comp_name = "Computer#{el + 1}"
       @players << ComputerPlayer.new(comp_name, Board.new(board))
-      puts "Computer#{}"
+      puts "#{comp_name} was added"
     end
   end
 
