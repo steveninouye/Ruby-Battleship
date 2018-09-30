@@ -11,9 +11,6 @@ class Player
   def post_attack(coord)
   end
 
-  def attack(coord)
-  end
-
   def count
     @board.reduce(0) { |a,row| a + row.count(:s) }
   end
