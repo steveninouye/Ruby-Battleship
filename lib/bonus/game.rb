@@ -8,7 +8,7 @@ class Game
   end
 
   def play
-    setup
+    game_setup
     until game_over?
       @current_player = @players.unshift[0]
       take_turn
@@ -19,7 +19,7 @@ class Game
 
   private
 
-  def setup
+  def game_setup
     num_rows = get_num_input(20, "How many rows on the board?")
     num_columns = get_num_input(20, "How many columns on the board?")
     board = [num_rows, num_columns]
