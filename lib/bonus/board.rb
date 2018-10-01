@@ -7,7 +7,7 @@ class Board
 
   def create_board(board)
     rows, cols = board
-    Array.new(rows){ Array.new(cols, nil) }
+    Array.new(rows){ Array.new(cols, "") }
   end
 
   def place_ship
@@ -20,6 +20,6 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new([5,6])
-  board[2,2] = 1
+  board[2,2] = :X
   board.board.each {|e| p e }
 end
