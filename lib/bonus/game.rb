@@ -22,9 +22,9 @@ class Game
   def game_setup
     num_rows = get_num_input(20, "How many rows on the board?")
     num_columns = get_num_input(20, "How many columns on the board?")
-    board = [num_rows, num_columns]
-    create_human_players(board)
-    create_comp_players(board)
+    @board = [num_rows, num_columns]
+    create_human_players
+    create_comp_players
     place_ships
     shuffle_players
   end
@@ -62,9 +62,7 @@ class Game
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
       player_name = gets.chomp
-      @players << HumanPlayer.new(player_name, Board.new(board))
-      puts "#{player_name} was added"
-      place_ships
+      create_player(player_name, HumanPlayer)
     end
   end
 
@@ -72,10 +70,15 @@ class Game
     num_comp_players = get_num_input(10, "How many computers would you like?")
     num_comp_players.times do |el|
       comp_name = "Computer#{el + 1}"
-      @players << ComputerPlayer.new(comp_name, Board.new(board))
-      puts "#{comp_name} was added"
-      place_ships
+      create_player(comp_name, ComputerPlayer)
     end
+  end
+
+  def create_player(name, class)
+    @players << class.new(name, Board.new(@board))
+    puts "#{name} was addded"
+    place_ships
+    puts "#{name} placed their ships"
   end
 
   def place_ships
