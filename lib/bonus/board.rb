@@ -18,6 +18,8 @@ class Board
   end
 end
 
-board = Board.new([5,6])
-board[2,2] = 1
-board.board.each {|e| p e }
+if __FILE__ == $PROGRAM_NAME
+  board = Board.new([5,6])
+  board[2,2] = 1
+  board.board.each {|e| p e }
+end
