@@ -25,7 +25,6 @@ class Game
     @board = [num_rows, num_columns]
     create_human_players
     create_comp_players
-    place_ships
     shuffle_players
   end
 
@@ -77,12 +76,8 @@ class Game
   def create_player(name, class)
     @players << class.new(name, Board.new(@board))
     puts "#{name} was addded"
-    place_ships
+    @players[-1]place_ships
     puts "#{name} placed their ships"
-  end
-
-  def place_ships
-    @players[-1].place_ships
   end
 
   def shuffle_players
