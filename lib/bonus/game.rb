@@ -9,6 +9,7 @@ class Game
 
   def play
     game_setup
+    place_ships
     until game_over?
       @current_player = @players.unshift[0]
       take_turn
@@ -26,6 +27,12 @@ class Game
     create_human_players(board)
     create_comp_players(board)
     shuffle_players
+  end
+
+  def place_ships
+    @players.each do |player|
+      
+    end
   end
 
   def take_turn
