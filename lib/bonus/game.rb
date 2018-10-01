@@ -81,6 +81,6 @@ class Game
   end
 
   def game_over?
-    @players.length == 1
+    @players.length < 2
   end
 end

@@ -8,6 +8,13 @@ class Player
     @board = Board.new(board)
   end
 
+  def get_attack
+    puts "#{@name}: what row would you like to attack?"
+    row = gets.chomp
+    puts "#{@name}: what column would you like to attack?"
+    col = gets.chomp
+  end
+
   def post_attack(coord)
     row, col = coord
     @board[row, col] = :X
