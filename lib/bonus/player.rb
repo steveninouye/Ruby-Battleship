@@ -9,10 +9,12 @@ class Player
   end
 
   def post_attack(coord)
+    row, col = coord
+    @board[row, col] = :X
   end
 
   def count
-    @board.reduce(0) { |a,row| a + row.count(:s) }
+    @board.reduce(0) { |a,row| a + row.count(:O) }
   end
 
   def defeated?
