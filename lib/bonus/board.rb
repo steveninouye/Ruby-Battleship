@@ -1,5 +1,4 @@
 class Board
-  attr_reader :board
 
   def initialize(board)
     @board = create_board(board)
