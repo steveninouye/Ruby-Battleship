@@ -1,5 +1,4 @@
 class Board
-    attr_reader :grid
 
     def initialize(grid = self.class.default_grid)
         @grid = grid
@@ -44,11 +43,11 @@ class Board
 
     def [](pos)
         row, col = pos
-        grid[row][col]
+        @grid[row][col]
     end
 
     def []=(pos, sym)
         x, y = pos
-        grid[x][y] = sym
+        @grid[x][y] = sym
     end
 end

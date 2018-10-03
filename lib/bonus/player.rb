@@ -20,6 +20,9 @@ class Player
     @board[row, col] = :X
   end
 
+  def place_ships
+  end
+
   def count
     @board.reduce(0) { |a,row| a + row.count(:O) }
   end

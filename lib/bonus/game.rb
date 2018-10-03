@@ -73,10 +73,10 @@ class Game
     end
   end
 
-  def create_player(name, class)
-    @players << class.new(name, Board.new(@board))
+  def create_player(name, class_name)
+    @players << class_name.new(name, Board.new(@board))
     puts "#{name} was addded"
-    @players[-1]place_ships
+    @players[-1].place_ships
     puts "#{name} placed their ships"
   end
 
