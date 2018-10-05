@@ -9,9 +9,6 @@ class Board
     Array.new(rows){ Array.new(cols, "") }
   end
 
-  def place_ship
-  end
-
   def []=(row_num, col_num, mark)
     @board[row_num][col_num] = mark
   end

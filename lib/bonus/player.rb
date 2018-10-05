@@ -1,4 +1,5 @@
 require_relative "./board.rb"
+require_relative "./ship.rb"
 
 class Player
   attr_reader :name
@@ -20,14 +21,15 @@ class Player
     @board[row, col] = :X
   end
 
-  def place_ships
-  end
-
   def count
     @board.reduce(0) { |a,row| a + row.count(:O) }
   end
 
   def defeated?
     count == 0
+  end
+
+  def place_ships
+    
   end
 end
