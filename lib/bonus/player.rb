@@ -40,12 +40,12 @@ class Player
   private
 
   def get_ship_input(size, name)
-    valid_input = false
+    valid_start_pos, valid_direction = false, false
     until valid_input
       puts "Where would you like to place your #{name}(#{size})?"
-      print "Starting position   => "
-      start_position = gets.chomp
-      print "Direction up(u), down(d), left(l), right(r) => "
+      print "Starting position *space separated >2 3< => "
+      start_position = gets.chomp.split
+      print "Direction up(u), down(d), left(l), right(r) >u< => "
       ship_direction = gets.chomp
       valid_input = valid_ship_pos?(start_position, ship_direction, ship.size)
     end
@@ -53,6 +53,13 @@ class Player
   end
 
   def valid_ship_pos?(start_position, ship_direction, size)
+    if start_position.any? { |el| !is_int(el) }
+      puts "You have entered"
+    end
+    true
+  end
 
+  def is_int?(num_str)
+    num_str == num_str.to_i.to_s
   end
 end
