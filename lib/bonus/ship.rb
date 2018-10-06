@@ -1,6 +1,6 @@
 class Ship
   attr_reader :name, :size
-  
+
   SHIPS = {
     "Carrier" => 5,
     "Battleship" => 4,
@@ -12,13 +12,14 @@ class Ship
   def initialize(name)
     @name = name
     @size = SHIPS[name]
+    @hp = SHIPS[name]
   end
 
   def hit
-    @size -= 1
+    @hp -= 1
   end
 
   def destroyed?
-    @size == 0
+    @hp == 0
   end
 end

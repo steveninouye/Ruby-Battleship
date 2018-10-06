@@ -32,15 +32,24 @@ class Player
   def place_ships
     Ship::SHIPS.keys.each do |name|
       ship = Ship.new(name)
-      valid_input = false
-      until valid_input
-        puts "Where would you like to place your #{ship.name}(#{ship.size})?"
-        print "Starting position => "
-        start_pos = gets.chomp
-        print "End position => "
-        end_pos = gets.chomp
-      end
+      get_input_ship(ship.size, ship.name)
+      place_ship(ship)
     end
+  end
+
+  private
+
+  def input_ship(size, name)
+    valid_input = false
+    until valid_input
+      puts "Where would you like to place your #{name}(#{size})?"
+      print "Starting position => "
+      start_pos = gets.chomp
+      print "End position => "
+      end_pos = gets.chomp
+      valid_input = valid_ship_pos?(start_pos, end_pos, ship.size)
+    end
+
   end
 
   def valid_ship_pos?(start_pos, end_pos, size)
