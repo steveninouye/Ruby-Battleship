@@ -1,4 +1,6 @@
 class Ship
+  attr_reader :name, :size
+  
   SHIPS = {
     "Carrier" => 5,
     "Battleship" => 4,
