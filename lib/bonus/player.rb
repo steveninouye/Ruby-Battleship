@@ -83,12 +83,12 @@ class Player
         @operator = "+"
         validate_placement
       when "retry"
-        # TODO: "retry"
+        return false
       else
       puts "Invalid Input"
       return false
     end
-    [start_pos, direction]
+    [@start_pos, direction]
   end
 
   def validate_placement
