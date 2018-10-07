@@ -1,14 +1,18 @@
 class Board
   SHIPS = {
-    :Ca = {:name => "Carrier", :spaces => 5},
-    :Ba = {:name => "Battleship", :spaces => 4},
-    :Cr = {:name => "Cruiser", :spaces => 3},
-    :Su = {:name => "Submarine", :spaces => 3},
-    :De = {:name => "Destroyer", :spaces => 2}
+    :Ca = {:name => "Carrier", :size => 5},
+    :Ba = {:name => "Battleship", :size => 4},
+    :Cr = {:name => "Cruiser", :size => 3},
+    :Su = {:name => "Submarine", :size => 3},
+    :De = {:name => "Destroyer", :size => 2}
   }
 
   def initialize(board)
     @board = create_board(board) # used to display to enemy players
+  end
+
+  def full_display
+    @board.each {|row| p row }
   end
 
   def [](pos)

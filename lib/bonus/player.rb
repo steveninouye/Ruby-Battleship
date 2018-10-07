@@ -30,23 +30,25 @@ class Player
   end
 
   def place_ships
-    Board::SHIPS.keys.each do |sym|
-      @ship = sym
+    Board::SHIPS.each do |sym, obj|
+      @sym, @name, @size = sym, obj[:name], obj[:size]
       until valid_ship_input
         input = get_ship_input # [start_pos, direction]
         valid_ship_input = validate_ship_input(input)
         place_ship(valid_ship_input) if valid_ship_input
       end
     end
-    [:@ship, :@operator, :@start_pos].each {|e| remove_instance_variable(e)
+    # TODO: clear screen
+    [:@sym, :@name, :@size, :@operator, :@start_pos, :@row_col].each {|e| remove_instance_variable(e)}
   end
 
   private
 
   def get_ship_input
-    puts "Where would you like to place your #{@ship.name}(#{@ship.size})?"
+    @board.full_display
+    puts "Where would you like to place your #{@name}(#{@size})?"
     print "Starting position *space separated >2 3< => "
-    start_pos = gets.chomp
+    start_input = gets.chomp
     print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
     direction = gets.chomp
     [start_input, direction]
@@ -65,48 +67,21 @@ class Player
     end
     case direction
       when "r"
+        @row_col = [0, @size]
         @operator = "+"
         validate_placement
-        # check if 'size - 1' spaces to the right are == ""
-        size.times do |n|
-          if @board[row, col + n] != ""
-            puts "Invalid Input"
-            return false
-          end
-        end
-        size.times do |n|
-          @board[row, col + n] = :O
-        end
       when "l"
-        size.times do |n|
-          if @board[row, col - n] != ""
-            puts "Invalid Input"
-            return false
-          end
-        end
-        size.times do |n|
-          @board[row, col - n] = :O
-        end
+        @row_col = [0, @size]
+        @operator = "-"
+        validate_placement
       when "u"
-        size.times do |n|
-          if @board[row - n, col] != ""
-            puts "Invalid Input"
-            return false
-          end
-        end
-        size.times do |n|
-          @board[row - n, col] = :O
-        end
+        @row_col = [@size, 0]
+        @operator = "-"
+        validate_placement
       when "d"
-        size.times do |n|
-          if @board[row + n, col] != ""
-            puts "Invalid Input"
-            return false
-          end
-        end
-        size.times do |n|
-          @board[row + n, col] = :O
-        end
+        @row_col = [@size, 0]
+        @operator = "+"
+        validate_placement
       when "retry"
         # TODO: "retry"
       else
@@ -116,17 +91,18 @@ class Player
     [start_pos, direction]
   end
 
-  def validate_placement(start_pos, operator)
-    row, col = start_pos
-    @shipt.size.times do |n|
-      if @board[row - n, col] != ""
-        puts "Invalid Input"
+  def validate_placement
+    row, col = @start_pos
+    @size.times do |n|
+      if @board[operation_passer] != " "
+        puts "Invalid Placement of #{@name}"
         return false
       end
     end
   end
 
-  def operation_passer(row, col, row_num, col_num, oper)
-    [row.send(oper, row_num), col.send(oper, col_num)]
+  def operation_passer
+    row, col = @start_pos
+    [row.send(@operator, @row_col[0]), col.send(@operator, @row_col[1])]
   end
 end
