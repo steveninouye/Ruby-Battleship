@@ -31,17 +31,16 @@ class Player
 
   def place_ships
     Ship::SHIPS.keys.each do |name|
-      ship = Ship.new(name)
-      get_ship_input(ship.size, ship.name)
-      place_ship(ship)
+      @ship = Ship.new(name)
+      get_ship_input
     end
   end
 
   private
 
-  def get_ship_input(size, name)
+  def get_ship_input
     valid_start_pos, valid_direction = false, false
-    puts "Where would you like to place your #{name}(#{size})?"
+    puts "Where would you like to place your #{@ship.name}(#{@ship.size})?"
     until valid_start_pos
       print "Starting position *space separated >2 3< => "
       input = gets.chomp
@@ -111,5 +110,18 @@ class Player
       puts "Invalid Input"
       return false
     end
+  end
+
+  def validate_place(size)
+    size.times do |n|
+      if @board[row - n, col] != ""
+        puts "Invalid Input"
+        return false
+      end
+    end
+  end
+
+  def operation_passer(row, col, row_num, col_num, oper)
+    [row.send(oper, row_num), col.send(oper, col_num)]
   end
 end
