@@ -45,17 +45,16 @@ class Player
     until valid_start_pos
       print "Starting position *space separated >2 3< => "
       input = gets.chomp
-      valid_start_pos = valid_start_pos(input)
+      valid_start_pos = validate_start_pos(input)
     end
     until valid_direction
       print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
       direction = gets.chomp
-      # TODO: "retry"
-      valid_input = valid_direction(valid_start_pos, direction, size)
+      valid_direction = validate_direction(valid_start_pos, direction, size)
     end
   end
 
-  def valid_start_pos(input)
+  def validate_start_pos(input)
     arr = input.split
     start_position = arr.map{|el| el.to_i}
     return start_position if start_position == arr && on_board?(start_position)
@@ -66,7 +65,28 @@ class Player
     @board[pos]
   end
 
-  def valid_direction(start_pos, direction, size)
-    
+  def validate_direction(start_pos, direction, size)
+    end_row, end_col = start_pos
+    case direction
+      when "r"
+        end_col += size
+      when "l"
+        end_col -= size
+      when "u"
+        end_row -= size
+      when "d"
+        end_row += size
+      when "retry"
+        # TODO: "retry"
+      else
+      puts "Invalid Input"
+      return false
+    end
+    end_pos = [end_row, end_col]
+    validate_ship_placement(start_pos, end_pos)
+  end
+
+  def validate_ship_placement(start_pos, end_pos)
+
   end
 end
