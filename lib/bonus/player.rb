@@ -32,38 +32,32 @@ class Player
   def place_ships
     Ship::SHIPS.keys.each do |name|
       @ship = Ship.new(name)
-      get_ship_input
+      until valid_ship_input
+        @input = get_ship_input # [start_pos, direction]
+        valid_ship_input = validate_ship_input(@input)
+        place_ship(@input) if valid_ship_input
+      end
     end
   end
 
   private
 
   def get_ship_input
-    valid_start_pos, valid_direction = false, false
     puts "Where would you like to place your #{@ship.name}(#{@ship.size})?"
-    until valid_start_pos
-      print "Starting position *space separated >2 3< => "
-      input = gets.chomp
-      valid_start_pos = validate_start_pos(input)
-    end
-    until valid_direction
-      print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
-      direction = gets.chomp
-      valid_direction = validate_direction(valid_start_pos, direction, size)
-    end
+    print "Starting position *space separated >2 3< => "
+    start_pos = gets.chomp
+    print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
+    direction = gets.chomp
+    [start_pos, direction]
   end
 
-  def validate_start_pos(input)
-    arr = input.split
-    start_position = arr.map{|el| el.to_i}
-    return start_position if start_position == arr && @board[pos] == ""
-    puts "Invalid Input"
-  end
-
-  def validate_direction(start_pos, direction, size)
+  def validate_ship_input(input)
+    start_pos, direction = input
     row, col = start_pos
     case direction
       when "r"
+        check_placement
+        place_ship
         # check if 'size - 1' spaces to the right are == ""
         size.times do |n|
           if @board[row, col + n] != ""
