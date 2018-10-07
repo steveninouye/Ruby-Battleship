@@ -62,27 +62,54 @@ class Player
   end
 
   def validate_direction(start_pos, direction, size)
-    end_row, end_col = start_pos
+    row, col = start_pos
     case direction
       when "r"
-        end_col += size
+        # check if 'size - 1' spaces to the right are == ""
+        size.times do |n|
+          if @board[row, col + n] != ""
+            puts "Invalid Input"
+            return false
+          end
+        end
+        size.times do |n|
+          @board[row, col + n] = :O
+        end
       when "l"
-        end_col -= size
+        size.times do |n|
+          if @board[row, col - n] != ""
+            puts "Invalid Input"
+            return false
+          end
+        end
+        size.times do |n|
+          @board[row, col - n] = :O
+        end
       when "u"
-        end_row -= size
+        size.times do |n|
+          if @board[row - n, col] != ""
+            puts "Invalid Input"
+            return false
+          end
+        end
+        size.times do |n|
+          @board[row - n, col] = :O
+        end
       when "d"
-        end_row += size
+        size.times do |n|
+          if @board[row + n, col] != ""
+            puts "Invalid Input"
+            return false
+          end
+        end
+        size.times do |n|
+          @board[row + n, col] = :O
+        end
       when "retry"
         # TODO: "retry"
       else
       puts "Invalid Input"
       return false
     end
-    end_pos = [end_row, end_col]
-    validate_ship_placement(start_pos, end_pos)
-  end
-
-  def validate_ship_placement(start_pos, end_pos)
-
   end
 end
