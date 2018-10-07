@@ -57,12 +57,8 @@ class Player
   def validate_start_pos(input)
     arr = input.split
     start_position = arr.map{|el| el.to_i}
-    return start_position if start_position == arr && on_board?(start_position)
+    return start_position if start_position == arr && @board[pos] == ""
     puts "Invalid Input"
-  end
-
-  def on_board?(pos)
-    @board[pos]
   end
 
   def validate_direction(start_pos, direction, size)
