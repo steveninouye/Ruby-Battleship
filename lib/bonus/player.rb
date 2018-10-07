@@ -33,11 +33,12 @@ class Player
     Ship::SHIPS.keys.each do |name|
       @ship = Ship.new(name)
       until valid_ship_input
-        @input = get_ship_input # [start_pos, direction]
-        valid_ship_input = validate_ship_input(@input)
-        place_ship(@input) if valid_ship_input
+        input = get_ship_input # [start_pos, direction]
+        valid_ship_input = validate_ship_input(input)
+        place_ship(valid_ship_input) if valid_ship_input
       end
     end
+    [:@ship, :@operator, :@start_pos].each {|e| remove_instance_variable(e)
   end
 
   private
@@ -48,16 +49,24 @@ class Player
     start_pos = gets.chomp
     print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
     direction = gets.chomp
-    [start_pos, direction]
+    [start_input, direction]
   end
 
   def validate_ship_input(input)
-    start_pos, direction = input
-    row, col = start_pos
+    start_input, direction = input
+    @start_pos = start_input.split.map {|e| e.to_i}
+    if @start_pos.length != 2 || "#{@start_pos[0]} #{@start_pos[1]}" != start_input
+      puts "Invalid Start Position"
+      return false
+    end
+    if direction != "retry" && (direction.length != 1 || !"udlr".include?(direction))
+      puts "Invalid Direction"
+      return false
+    end
     case direction
       when "r"
-        check_placement
-        place_ship
+        @operator = "+"
+        validate_placement
         # check if 'size - 1' spaces to the right are == ""
         size.times do |n|
           if @board[row, col + n] != ""
@@ -104,10 +113,12 @@ class Player
       puts "Invalid Input"
       return false
     end
+    [start_pos, direction]
   end
 
-  def validate_place(size)
-    size.times do |n|
+  def validate_placement(start_pos, operator)
+    row, col = start_pos
+    @shipt.size.times do |n|
       if @board[row - n, col] != ""
         puts "Invalid Input"
         return false
