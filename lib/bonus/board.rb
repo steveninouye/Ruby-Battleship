@@ -9,7 +9,13 @@ class Board
     Array.new(rows){ Array.new(cols, "") }
   end
 
-  def []=(row_num, col_num, mark)
+  def [](pos)
+    row_num, col_num = pos
+    @board[row_num][col_num]
+  end
+
+  def []=(pos, mark)
+    row_num, col_num = pos
     @board[row_num][col_num] = mark
   end
 end

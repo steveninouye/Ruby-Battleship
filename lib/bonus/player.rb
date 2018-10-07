@@ -41,25 +41,32 @@ class Player
 
   def get_ship_input(size, name)
     valid_start_pos, valid_direction = false, false
-    until valid_input
-      puts "Where would you like to place your #{name}(#{size})?"
+    puts "Where would you like to place your #{name}(#{size})?"
+    until valid_start_pos
       print "Starting position *space separated >2 3< => "
-      start_position = gets.chomp.split
-      print "Direction up(u), down(d), left(l), right(r) >u< => "
-      ship_direction = gets.chomp
-      valid_input = valid_ship_pos?(start_position, ship_direction, ship.size)
+      input = gets.chomp
+      valid_start_pos = valid_start_pos(input)
     end
-
+    until valid_direction
+      print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
+      direction = gets.chomp
+      # TODO: "retry"
+      valid_input = valid_direction(valid_start_pos, direction, size)
+    end
   end
 
-  def valid_ship_pos?(start_position, ship_direction, size)
-    if start_position.any? { |el| !is_int(el) }
-      puts "You have entered"
-    end
-    true
+  def valid_start_pos(input)
+    arr = input.split
+    start_position = arr.map{|el| el.to_i}
+    return start_position if start_position == arr && on_board?(start_position)
+    puts "Invalid Input"
   end
 
-  def is_int?(num_str)
-    num_str == num_str.to_i.to_s
+  def on_board?(pos)
+    @board[pos]
+  end
+
+  def valid_direction(start_pos, direction, size)
+    
   end
 end
