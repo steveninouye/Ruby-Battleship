@@ -1,10 +1,10 @@
 class Board
   SHIPS = {  # Abbreviated to 2 letter symbol for better printing
-    :Ca => 5,  # Carrier
-    :Ba => 4,  # Battleship
-    :Cr => 3,  # Cruiser
-    :Su => 3,  # Submarine
-    :De => 2   # Destroyer
+    :Ca = {:name => "Carrier", :spaces => 5}
+    :Ba = {:name => "Battleship", :spaces => 4} 
+    :Cr = {:name => "Cruiser", :spaces => 3}
+    :Su = {:name => "Submarine", :spaces => 3} 
+    :De = {:name => "Destroyer", :spaces => 2} 
   }
 
   def initialize(board)

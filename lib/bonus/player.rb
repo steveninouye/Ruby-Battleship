@@ -30,8 +30,8 @@ class Player
   end
 
   def place_ships
-    Ship::SHIPS.keys.each do |name|
-      @ship = Ship.new(name)
+    Board::SHIPS.keys.each do |sym|
+      @ship = sym
       until valid_ship_input
         input = get_ship_input # [start_pos, direction]
         valid_ship_input = validate_ship_input(input)
