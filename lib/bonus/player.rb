@@ -105,4 +105,11 @@ class Player
     row, col = @start_pos
     [row.send(@operator, @row_col[0]), col.send(@operator, @row_col[1])]
   end
+
+  def place_ship(input)
+    row, col = @start_pos
+    @size.times do |n|
+      @board[operation_passer] = @sym
+    end
+  end
 end
