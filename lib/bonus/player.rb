@@ -61,10 +61,6 @@ class Player
       puts "Invalid Start Position"
       return false
     end
-    if direction != "retry" && (direction.length != 1 || !"udlr".include?(direction))
-      puts "Invalid Direction"
-      return false
-    end
     case direction
       when "r"
         @row_col = [0, @size]
@@ -85,7 +81,7 @@ class Player
       when "retry"
         return false
       else
-      puts "Invalid Input"
+      puts "Invalid Direction"
       return false
     end
     [@start_pos, direction]
