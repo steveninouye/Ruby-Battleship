@@ -9,8 +9,14 @@ class Board
 
   def initialize(board)
     @board = create_board(board) # used to display to enemy players
-    @num_rows = board[0]
-    @num_cols = board[1]
+  end
+
+  def num_rows
+    @board.length
+  end
+
+  def num_cols
+    @board[0].length
   end
 
   def full_display
