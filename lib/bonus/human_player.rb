@@ -4,8 +4,11 @@ require_relative "./board.rb"
 class HumanPlayer < Player
 
   def get_attack
-    puts "Where would you like to attack?"
-    gets.chomp.split(" ")
+    valid_input = nil
+    until valid_input
+      puts "Where would you like to attack?"
+      validate_attack(gets.chomp)
+    end
   end
 
   def place_ships
@@ -30,5 +33,8 @@ class HumanPlayer < Player
     print "Direction up(u), down(d), left(l), right(r), (retry) >u< => "
     direction = gets.chomp
     [start_input, direction]
+  end
+
+  def validate_attack(coord)
   end
 end
