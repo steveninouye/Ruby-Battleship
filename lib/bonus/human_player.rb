@@ -7,8 +7,9 @@ class HumanPlayer < Player
     valid_input = nil
     until valid_input
       puts "Where would you like to attack?"
-      validate_attack(gets.chomp)
+      valid_input = validate_attack(gets.chomp)
     end
+    valid_input
   end
 
   def place_ships
@@ -36,5 +37,6 @@ class HumanPlayer < Player
   end
 
   def validate_attack(coord)
+    
   end
 end

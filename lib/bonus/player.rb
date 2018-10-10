@@ -7,7 +7,7 @@ class Player
   def initialize (name, board)
     @name = name
     @board = Board.new(board)
-    @grid = board
+    @grid = board  # [num_rows, num_cols]
   end
 
   def post_attack(coord)
@@ -82,6 +82,6 @@ class Player
 
   def garbage_collect
     system "clear"
-    [:@grid, :@sym, :@name, :@size, :@operator, :@start_pos, :@row].each {|e| remove_instance_variable(e)}
+    [:@sym, :@name, :@size, :@operator, :@start_pos, :@row].each {|e| remove_instance_variable(e)}
   end
 end
