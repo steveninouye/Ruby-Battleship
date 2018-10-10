@@ -9,13 +9,6 @@ class Player
     @board = Board.new(board)
   end
 
-  def get_attack
-    puts "#{@name}: what row would you like to attack?"
-    row = gets.chomp
-    puts "#{@name}: what column would you like to attack?"
-    col = gets.chomp
-  end
-
   def post_attack(coord)
     row, col = coord
     @board[row, col] = :X
@@ -38,7 +31,7 @@ class Player
         place_ship(valid_ship_input) if valid_ship_input
       end
     end
-    # TODO: clear screen
+    system "clear"
     [:@sym, :@name, :@size, :@operator, :@start_pos, :@row_col].each {|e| remove_instance_variable(e)}
   end
 
@@ -63,19 +56,19 @@ class Player
     end
     case direction
       when "r"
-        @row_col = [0, @size]
+        @row = true
         @operator = "+"
         validate_placement
       when "l"
-        @row_col = [0, @size]
+        @row = true
         @operator = "-"
         validate_placement
       when "u"
-        @row_col = [@size, 0]
+        @row = false
         @operator = "-"
         validate_placement
       when "d"
-        @row_col = [@size, 0]
+        @row = false
         @operator = "+"
         validate_placement
       when "retry"
@@ -88,23 +81,24 @@ class Player
   end
 
   def validate_placement
-    row, col = @start_pos
     @size.times do |n|
-      if @board[operation_passer] != " "
+      if @board[operation_passer(n)] != " "
         puts "Invalid Placement of #{@name}"
         return false
       end
     end
   end
 
-  def operation_passer
+  def operation_passer(n)
     row, col = @start_pos
-    [row.send(@operator, @row_col[0]), col.send(@operator, @row_col[1])]
+    row = row.send(@operator, n) if @row
+    col = col.send(@operator, n) if !@row
+    [row, col]
   end
 
   def place_ship(input)
     @size.times do |n|
-      @board[operation_passer] = @sym
+      @board[operation_passer(n)] = @sym
     end
   end
 end
