@@ -32,14 +32,21 @@ class Game
     puts "#{@current_player.name}'s turn"
     coord = @current_player.get_attack
     attack(coord)
+    finish_turn
+  end
+
+  def finish_turn
+    print "Press ENTER to complete your turn"
+    gets
+    system "clear"
   end
 
   def attack(coord)
     @players.each_with_index do |player,idx|
       player.post_attack(coord)
       if player.defeated?
-        @players.delete_at(idx)
         puts "#{player.name} was destroyed!"
+        @players.delete_at(idx)
       end
     end
   end
