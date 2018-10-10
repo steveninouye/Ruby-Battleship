@@ -2,7 +2,7 @@ require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
 
 class Game
-  
+
   def initialize
     @players = []
   end
@@ -75,7 +75,7 @@ class Game
 
   def create_player(name, class_name)
     @players << class_name.new(name, Board.new(@board))
-    puts "#{name} was addded"
+    puts "#{name} was added"
     @players[-1].place_ships
     puts "#{name} placed their ships"
   end

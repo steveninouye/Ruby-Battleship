@@ -26,12 +26,9 @@ class Board
   end
 
   def ship_destroyed?
-    @ships.each do |ship|    # TODO: ship is a string and needs to be intance variable
-      if ship.length == 0
-        @ships.delete(ship)
-        return ship
-      end
-    end
+    # find symbol that was attacked
+    # see if there are any of the symbols left on the board
+    # TODO
   end
 
   private

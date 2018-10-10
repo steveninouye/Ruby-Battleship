@@ -22,7 +22,7 @@ class Player
   end
 
   def count
-    @board.reduce(0) { |a,row| a + row.count(:O) }
+    @board.reduce(0) { |a,row| a + row.count {|e| e.class == Symbol} }
   end
 
   def defeated?
@@ -103,7 +103,6 @@ class Player
   end
 
   def place_ship(input)
-    row, col = @start_pos
     @size.times do |n|
       @board[operation_passer] = @sym
     end
