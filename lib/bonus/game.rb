@@ -20,8 +20,8 @@ class Game
   private
 
   def game_setup
-    num_rows = get_num_input(20, "How many rows on the board?")
-    num_columns = get_num_input(20, "How many columns on the board?")
+    num_rows = get_num_input(10, 100, "How many rows on the board?")
+    num_columns = get_num_input(10, 100 "How many columns on the board?")
     @board = [num_rows, num_columns]
     create_human_players
     create_comp_players
@@ -44,20 +44,20 @@ class Game
     end
   end
 
-  def get_num_input(max, str)
+  def get_num_input(min,max, str)
     num = nil
     while true
       puts str
       input = gets.chomp
-      num = input.to_i if ("0"..max.to_s).include?(input)
+      num = input.to_i if (min..max).include?(input.to_i)
       break if num
-      puts "Enter Valid Number between 0 and #{max}"
+      puts "Enter Valid Number between #{min} and #{max}"
     end
     num
   end
 
   def create_human_players(board)
-    num_human_players = get_num_input(10, "How many players will be playing?")
+    num_human_players = get_num_input(0, 10, "How many players will be playing?")
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
       player_name = gets.chomp
@@ -66,7 +66,7 @@ class Game
   end
 
   def create_comp_players(board)
-    num_comp_players = get_num_input(10, "How many computers would you like?")
+    num_comp_players = get_num_input(0, 10, "How many computers would you like?")
     num_comp_players.times do |el|
       comp_name = "Computer#{el + 1}"
       create_player(comp_name, ComputerPlayer)
