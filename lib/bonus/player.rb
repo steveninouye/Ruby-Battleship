@@ -14,7 +14,7 @@ class Player
 
   def post_attack(coord)
     row, col = coord
-    @board[row, col] = :X
+    @board[row, col] = "X"
   end
 
   def count
