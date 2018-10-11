@@ -6,8 +6,11 @@ class HumanPlayer < Player
   def get_attack
     valid_input = nil
     until valid_input
-      puts "Where would you like to attack?"
+      puts "What row would you like to attack?"
+      validate_num(gets.chomp)
+      puts "What column would you like to attack?"
       valid_input = validate_attack(gets.chomp)
+      puts "Invalid Input" if !valid_input
     end
     valid_input
   end
@@ -37,6 +40,6 @@ class HumanPlayer < Player
   end
 
   def validate_attack(coord)
-    
+
   end
 end

@@ -51,7 +51,7 @@ class Game
     end
   end
 
-  def get_num_input(min,max, str)
+  def get_num_input(min, max, str)
     num = nil
     while true
       puts str
