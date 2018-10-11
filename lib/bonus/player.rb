@@ -1,5 +1,6 @@
 require_relative "./board.rb"
 require_relative "./ship.rb"
+require_relative "./validation.rb"
 
 class Player
   attr_reader :name
@@ -25,47 +26,7 @@ class Player
 
   private
 
-  def validate_ship_input(input)
-    start_input, direction = input
-    @start_pos = start_input.split.map {|e| e.to_i}
-    if @start_pos.length != 2 || "#{@start_pos[0]} #{@start_pos[1]}" != start_input
-      puts "Invalid Start Position"
-      return false
-    end
-    case direction
-      when "r"
-        @row = true
-        @operator = "+"
-        validate_placement
-      when "l"
-        @row = true
-        @operator = "-"
-        validate_placement
-      when "u"
-        @row = false
-        @operator = "-"
-        validate_placement
-      when "d"
-        @row = false
-        @operator = "+"
-        validate_placement
-      when "retry"
-        return false
-      else
-      puts "Invalid Direction"
-      return false
-    end
-    [@start_pos, direction]
-  end
-
-  def validate_placement
-    @size.times do |n|
-      if @board[operation_passer(n)] != " "
-        puts "Invalid Placement of #{@name}"
-        return false
-      end
-    end
-  end
+  include Ship_Pos_Validation
 
   def operation_passer(n)
     row, col = @start_pos
@@ -82,6 +43,6 @@ class Player
 
   def garbage_collect
     system "clear"
-    [:@sym, :@name, :@size, :@operator, :@start_pos, :@row].each {|e| remove_instance_variable(e)}
+    [:@sym, :@name, :@size, :@operator, :@start_pos, :@direction, :@row].each {|e| remove_instance_variable(e)}
   end
 end

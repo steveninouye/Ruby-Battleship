@@ -1,5 +1,7 @@
 require_relative "./player.rb"
 require_relative "./board.rb"
+require_relative "./validation.rb"
+
 
 class HumanPlayer < Player
 
@@ -19,7 +21,7 @@ class HumanPlayer < Player
     Board::SHIPS.each do |sym, obj|
       @sym, @name, @size = sym, obj[:name], obj[:size]
       until valid_ship_input
-        input = get_ship_input # [start_pos, direction]
+        @start_pos = get_start_pos # [start_pos, direction]
         valid_ship_input = validate_ship_input(input)
         place_ship(valid_ship_input) if valid_ship_input
       end
@@ -28,6 +30,14 @@ class HumanPlayer < Player
   end
 
   private
+
+  include Num_Input_Validation
+
+  def get_start_pos
+    row = get_num_input(0, 10, "What row would you like to place your #{@name}")
+    col = get_num_input(0, 10, "What column would you like to place your #{@name}")
+    [row, col]
+  end
 
   def get_ship_input
     @board.full_display

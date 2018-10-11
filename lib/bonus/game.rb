@@ -1,5 +1,6 @@
 require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
+require_relative "./validation.rb"
 
 class Game
 
@@ -18,6 +19,8 @@ class Game
   end
 
   private
+
+  include Num_Input_Validation
 
   def game_setup
     num_rows = get_num_input(10, 100, "How many rows on the board?")
@@ -51,18 +54,6 @@ class Game
     end
   end
 
-  def get_num_input(min, max, str)
-    num = nil
-    while true
-      puts str
-      input = gets.chomp
-      num = input.to_i if (min..max).include?(input.to_i)
-      break if num
-      puts "Enter Valid Number between #{min} and #{max}"
-    end
-    num
-  end
-
   def create_human_players(board)
     num_human_players = get_num_input(0, 10, "How many players will be playing?")
     num_human_players.times do |el|
@@ -93,6 +84,6 @@ class Game
   end
 
   def game_over?
-    @players.length < 2
+    @players.length == 1
   end
 end
