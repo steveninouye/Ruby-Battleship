@@ -22,28 +22,6 @@ class Game
 
   include Num_Input_Validation
 
-  def game_setup
-    num_rows = get_num_input(10, 100, "How many rows on the board?")
-    num_columns = get_num_input(10, 100 "How many columns on the board?")
-    @board = [num_rows, num_columns]
-    create_human_players
-    create_comp_players
-    shuffle_players
-  end
-
-  def take_turn
-    puts "#{@current_player.name}'s turn"
-    coord = @current_player.get_attack
-    attack(coord)
-    finish_turn
-  end
-
-  def finish_turn
-    print "Press ENTER to complete your turn"
-    gets
-    system "clear"
-  end
-
   def attack(coord)
     @players.each_with_index do |player,idx|
       player.post_attack(coord)
@@ -51,6 +29,14 @@ class Game
         puts "#{player.name} was destroyed!"
         @players.delete_at(idx)
       end
+    end
+  end
+
+  def create_comp_players(board)
+    num_comp_players = get_num_input(0, 10, "How many computers would you like?")
+    num_comp_players.times do |el|
+      comp_name = "Computer#{el + 1}"
+      create_player(comp_name, ComputerPlayer)
     end
   end
 
@@ -63,14 +49,6 @@ class Game
     end
   end
 
-  def create_comp_players(board)
-    num_comp_players = get_num_input(0, 10, "How many computers would you like?")
-    num_comp_players.times do |el|
-      comp_name = "Computer#{el + 1}"
-      create_player(comp_name, ComputerPlayer)
-    end
-  end
-
   def create_player(name, class_name)
     @players << class_name.new(name, Board.new(@board))
     puts "#{name} was added"
@@ -78,12 +56,34 @@ class Game
     puts "#{name} placed their ships"
   end
 
+  def finish_turn
+    print "Press ENTER to complete your turn"
+    gets
+    system "clear"
+  end
+
+  def game_over?
+    @players.length == 1
+  end
+
+  def game_setup
+    num_rows = get_num_input(10, 100, "How many rows on the board?")
+    num_columns = get_num_input(10, 100 "How many columns on the board?")
+    @board = [num_rows, num_columns]
+    create_human_players
+    create_comp_players
+    shuffle_players
+  end
+
   def shuffle_players
     puts "Shuffling Players"
     @players = @players.shuffle
   end
 
-  def game_over?
-    @players.length == 1
+  def take_turn
+    puts "#{@current_player.name}'s turn"
+    coord = @current_player.get_attack
+    attack(coord)
+    finish_turn
   end
 end

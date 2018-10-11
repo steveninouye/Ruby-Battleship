@@ -1,6 +1,8 @@
 require_relative "./board.rb"
 require_relative "./ship.rb"
-require_relative "./validation.rb"
+require_relative "./modules/validation.rb"
+require_relative "./modules/calculator.rb"
+require_relative "./modules/optimization.rb"
 
 class Player
   attr_reader :name
@@ -8,7 +10,6 @@ class Player
   def initialize (name, board)
     @name = name
     @board = Board.new(board)
-    @grid = board  # [num_rows, num_cols]
   end
 
   def post_attack(coord)
@@ -24,25 +25,29 @@ class Player
     count == 0
   end
 
+  def place_ships
+    Board::SHIPS.each do |sym, obj|
+      @sym, @name, @size = sym, obj[:name], obj[:size]
+      until valid_ship_input
+        @start_pos = get_start_pos # [start_pos, direction]
+        @direction = get_direction
+        valid_ship_input = validate_ship_input
+        place_ship(valid_ship_input) if valid_ship_input
+      end
+    end
+    garbage_collect
+  end
+
   private
 
   include Ship_Pos_Validation
-
-  def operation_passer(n)
-    row, col = @start_pos
-    row = row.send(@operator, n) if @row
-    col = col.send(@operator, n) if !@row
-    [row, col]
-  end
+  include Coordinate_Calculator
+  include Memory_Cleanup
 
   def place_ship(input)
     @size.times do |n|
-      @board[operation_passer(n)] = @sym
+      coord = operation_passer(n)
+      @board[coord] = @sym
     end
-  end
-
-  def garbage_collect
-    system "clear"
-    [:@sym, :@name, :@size, :@operator, :@start_pos, :@direction, :@row].each {|e| remove_instance_variable(e)}
   end
 end

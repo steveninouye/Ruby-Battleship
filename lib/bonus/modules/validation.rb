@@ -12,10 +12,23 @@ module Num_Input_Validation
   end
 end
 
+module Direction_Validation
+  def get_direction
+    direction = nil
+    while true
+      print "What direction would you like your ship?\nup(u), down(d), left(l), right(r)\n=> "
+      input = gets.chomp
+      direction = input if input.length == 1 && "udlr".include?(input)
+      break if direction
+      puts "Enter a valid direction u/d/l/r"
+    end
+    direction
+  end
+end
+
 module Ship_Pos_Validation
   def validate_ship_input(input)
-    start_input, direction = input
-    case direction
+    case @direction
       when "r"
         @row = true
         @operator = "+"
@@ -43,7 +56,8 @@ module Ship_Pos_Validation
 
   def validate_placement
     @size.times do |n|
-      if @board[operation_passer(n)] != " "
+      coord = operation_passer(n)
+      if @board[coord] != " "
         puts "Invalid Placement of #{@name}"
         return false
       end
