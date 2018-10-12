@@ -24,13 +24,13 @@ class Board
     @board.each {|row| p row }
   end
 
-  def [](pos)
-    row_num, col_num = pos
+  def [](coord)
+    row_num, col_num = coord
     @board[row_num][col_num]
   end
 
-  def []=(pos, mark)
-    row_num, col_num = pos
+  def []=(coord, mark)
+    row_num, col_num = coord
     @board[row_num][col_num] = mark
   end
 

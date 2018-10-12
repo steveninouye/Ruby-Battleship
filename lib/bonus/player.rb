@@ -47,7 +47,7 @@ class Player
 
   def place_ship(input)
     @size.times do |n|
-      coord = operation_passer(n)
+      coord = calculate_coord(n)
       @board[coord] = @sym
     end
   end

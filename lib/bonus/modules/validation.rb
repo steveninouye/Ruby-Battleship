@@ -32,35 +32,35 @@ module Ship_Pos_Validation
       when "r"
         @row = true
         @operator = "+"
-        validate_placement
+        return valid_placement
       when "l"
         @row = true
         @operator = "-"
-        validate_placement
+        return valid_placement
       when "u"
         @row = false
         @operator = "-"
-        validate_placement
+        return valid_placement
       when "d"
         @row = false
         @operator = "+"
-        validate_placement
-      when "retry"
-        return false
+        return valid_placement
       else
       puts "Invalid Direction"
       return false
     end
-    [@start_pos, @direction]
   end
 
-  def validate_placement
+  def valid_placement
     @size.times do |n|
-      coord = operation_passer(n)
-      if @board[coord] != " "
-        puts "Invalid Placement of #{@name}"
+      row, col = calculate_coord(n)
+      unless (0...@board.num_rows).include?(row) &&
+            (0...@board.num_cols).include?(col) &&
+            @board[[row, col]] == " "
+        puts "INPUT INVALID::Invalid Placement of #{@name}"
         return false
       end
     end
+    [@start_pos, @direction]
   end
 end
