@@ -11,7 +11,7 @@ class Game
   def play
     game_setup
     until game_over?
-      @current_player = @players.unshift[0]
+      @current_player = @players.unshift
       take_turn
       @players << @current_player
     end

@@ -30,19 +30,19 @@ module Ship_Pos_Validation
   def validate_ship_input
     case @direction
       when "r"
-        @row = true
+        @col = false
         @operator = "+"
         return valid_placement
       when "l"
-        @row = true
+        @col = false
         @operator = "-"
         return valid_placement
       when "u"
-        @row = false
+        @col = true
         @operator = "-"
         return valid_placement
       when "d"
-        @row = false
+        @col = true
         @operator = "+"
         return valid_placement
       else
