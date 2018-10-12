@@ -24,7 +24,7 @@ class Game
 
   def attack(coord)
     @players.each_with_index do |player,idx|
-      player.post_attack(coord)
+      puts player.post_attack(coord)
       if player.defeated?
         puts "#{player.name} was destroyed!"
         @players.delete_at(idx)

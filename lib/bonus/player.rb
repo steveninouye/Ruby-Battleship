@@ -13,8 +13,9 @@ class Player
   end
 
   def post_attack(coord)
-    row, col = coord
+    element = @board[coord]
     @board[row, col] = "X"
+    element.class == Symbol ? "#{@name}: !!!HIT!!!" : "#{@name}: miss"
   end
 
   def count
