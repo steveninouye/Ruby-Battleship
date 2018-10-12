@@ -1,10 +1,10 @@
 class Board
   SHIPS = {
-    :Ca = {:name => "Carrier", :size => 5},
-    :Ba = {:name => "Battleship", :size => 4},
-    :Cr = {:name => "Cruiser", :size => 3},
-    :Su = {:name => "Submarine", :size => 3},
-    :De = {:name => "Destroyer", :size => 2}
+    :Ca => {:name => "Carrier", :size => 5},
+    :Ba => {:name => "Battleship", :size => 4},
+    :Cr => {:name => "Cruiser", :size => 3},
+    :Su => {:name => "Submarine", :size => 3},
+    :De => {:name => "Destroyer", :size => 2}
   }
 
   def initialize(board)
@@ -20,6 +20,7 @@ class Board
   end
 
   def full_display
+    # TODO: Display row and column numbers on display for better UI
     @board.each {|row| p row }
   end
 
@@ -43,7 +44,7 @@ class Board
 
   def create_board(board)
     rows, cols = board
-    Array.new(rows){ Array.new(cols, " ") }
+    Array.new(rows){ Array.new(cols) { " " } }
   end
 end
 

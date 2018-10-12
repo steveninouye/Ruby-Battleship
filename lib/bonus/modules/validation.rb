@@ -6,7 +6,7 @@ module Num_Input_Validation
       input = gets.chomp
       num = input.to_i if (min.to_s..max.to_s).include?(input)
       break if num
-      puts "Enter Valid Number between #{min} and #{max}"
+      puts "INVALID INPUT::Enter Valid Number between #{min} and #{max}"
     end
     num
   end
@@ -20,14 +20,14 @@ module Direction_Validation
       input = gets.chomp
       direction = input if input.length == 1 && "udlr".include?(input)
       break if direction
-      puts "Enter a valid direction u/d/l/r"
+      puts "INVALID INPUT::Enter a valid direction u/d/l/r"
     end
     direction
   end
 end
 
 module Ship_Pos_Validation
-  def validate_ship_input(input)
+  def validate_ship_input
     case @direction
       when "r"
         @row = true
@@ -51,7 +51,7 @@ module Ship_Pos_Validation
       puts "Invalid Direction"
       return false
     end
-    [@start_pos, direction]
+    [@start_pos, @direction]
   end
 
   def validate_placement

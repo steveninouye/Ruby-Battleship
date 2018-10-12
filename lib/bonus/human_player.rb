@@ -1,6 +1,6 @@
 require_relative "./player.rb"
 require_relative "./board.rb"
-require_relative "./validation.rb"
+require_relative "./modules/validation.rb"
 
 
 class HumanPlayer < Player
@@ -17,6 +17,7 @@ class HumanPlayer < Player
   include Direction_Validation
 
   def get_start_pos
+    @board.full_display
     row = get_num_input(0, @board.num_rows - 1, "What row would you like to place your #{@name}")
     col = get_num_input(0, @board.num_cols - 1, "What column would you like to place your #{@name}")
     [row, col]

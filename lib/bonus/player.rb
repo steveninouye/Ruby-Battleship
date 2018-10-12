@@ -1,5 +1,4 @@
 require_relative "./board.rb"
-require_relative "./ship.rb"
 require_relative "./modules/validation.rb"
 require_relative "./modules/calculator.rb"
 require_relative "./modules/optimization.rb"
@@ -29,6 +28,7 @@ class Player
   def place_ships
     Board::SHIPS.each do |sym, obj|
       @sym, @name, @size = sym, obj[:name], obj[:size]
+      valid_ship_input = false
       until valid_ship_input
         @start_pos = get_start_pos # [start_pos, direction]
         @direction = get_direction
