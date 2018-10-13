@@ -9,13 +9,13 @@ class Player
   def initialize (name, board)
     @name = name
     @board = Board.new(board)
-    @attack_log = []
+    @enemy_boards = {}
   end
 
   def post_attack(coord)
     element = @board[coord]
     @board[coord] = "X"
-    element.class == Symbol ? "#{@name}: !!!HIT!!!" : "#{@name}: miss"
+    element.class == Symbol ? [self, :hit] : [self, :miss]
   end
 
   def count
@@ -24,6 +24,12 @@ class Player
 
   def defeated?
     count == 0
+  end
+
+  def generate_enemy_boards(all_players, board)
+    all_players.each do |player|
+      @enemy_boards[player] = Board.new(board) unless player == self
+    end
   end
 
   def place_ships
@@ -45,6 +51,10 @@ class Player
   include Ship_Pos_Validation
   include Coordinate_Calculator
   include Memory_Cleanup
+
+  def log_attack(coord, result)
+    @attack_log << {:coord => coord, :result => result}
+  end
 
   def place_ship(input)
     @size.times do |n|
