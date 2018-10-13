@@ -3,12 +3,6 @@ require_relative "./board.rb"
 
 class ComputerPlayer < Player
 
-  def initialize (name, board)
-    @name = name
-    @board = Board.new(board)
-    @attack_log = []
-  end
-
   def get_attack
     coord = false
     while !coord || @past_attack_coord.include?(coord)
