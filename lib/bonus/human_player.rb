@@ -5,7 +5,13 @@ require_relative "./modules/validation.rb"
 
 class HumanPlayer < Player
 
+  def initialize (name, board)
+    @name = name
+    @board = Board.new(board)
+  end
+
   def get_attack
+    @board.full_display
     row = get_num_input(0, @board.num_rows - 1, "What row would you like to attack?")
     col = get_num_input(0, @board.num_cols - 1, "What column would you like to attack?")
     [row, col]
@@ -18,8 +24,8 @@ class HumanPlayer < Player
 
   def get_start_pos
     @board.full_display
-    row = get_num_input(0, @board.num_rows - 1, "What row would you like to place your #{@name}")
-    col = get_num_input(0, @board.num_cols - 1, "What column would you like to place your #{@name}")
+    row = get_num_input(0, @board.num_rows - 1, "What row would you like to place your #{@ship_name}")
+    col = get_num_input(0, @board.num_cols - 1, "What column would you like to place your #{@ship_name}")
     [row, col]
   end
 end

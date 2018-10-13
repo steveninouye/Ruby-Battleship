@@ -57,7 +57,7 @@ module Ship_Pos_Validation
       unless (0...@board.num_rows).include?(row) &&
             (0...@board.num_cols).include?(col) &&
             @board[[row, col]] == " "
-        puts "INPUT INVALID::Invalid Placement of #{@name}"
+        puts "INPUT INVALID::Invalid Placement of #{@ship_name}"
         return false
       end
     end

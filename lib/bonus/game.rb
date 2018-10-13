@@ -1,6 +1,7 @@
 require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
 require_relative "./modules/validation.rb"
+require "byebug"
 
 class Game
 
@@ -57,8 +58,7 @@ class Game
   end
 
   def finish_turn
-    print "Press ENTER to complete your turn"
-    gets
+    print "Press ENTER to complete your turn"; gets
     system "clear"
   end
 

@@ -9,6 +9,7 @@ class Board
 
   def initialize(board)
     @board = create_board(board) # used to display to enemy players
+    @ships = SHIPS.keys
   end
 
   def num_rows
@@ -20,8 +21,10 @@ class Board
   end
 
   def full_display
-    # TODO: Display row and column numbers on display for better UI
-    @board.each {|row| p row }
+    idx_arr = []
+    @board[0].each_index {|i| idx_arr.push(i)}
+    print "    "; print idx_arr.join("    "); puts ""
+    @board.each_with_index {|row, i| puts "#{i} #{row}" }
   end
 
   def [](coord)
@@ -32,6 +35,12 @@ class Board
   def []=(coord, mark)
     row_num, col_num = coord
     @board[row_num][col_num] = mark
+  end
+
+  def reduce(acc, &prc)
+    @board.reduce(acc) do |ac, row|
+      prc.call(ac,row)
+    end
   end
 
   def ship_destroyed?
