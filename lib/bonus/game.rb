@@ -50,6 +50,12 @@ class Game
     end
   end
 
+  def create_enemy_boards
+    @players.each do |player|
+      player.create_enemy_boards(@players, @board)
+    end
+  end
+
   def create_player(name, class_name)
     @players << class_name.new(name, @board)
     puts "#{name} was added"
@@ -72,6 +78,7 @@ class Game
     @board = [num_rows, num_columns]
     create_human_players
     create_comp_players
+    create_enemy_boards
     shuffle_players
     remove_instance_variable(:@board)
   end

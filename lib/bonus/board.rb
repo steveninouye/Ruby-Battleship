@@ -8,7 +8,7 @@ class Board
   }
 
   def initialize(board)
-    @board = create_board(board) # used to display to enemy players
+    @board = create_board(board)
     @ships = SHIPS.keys
   end
 
@@ -20,7 +20,7 @@ class Board
     @board[0].length
   end
 
-  def full_display
+  def display
     idx_arr = []
     @board[0].each_index {|i| idx_arr.push(i)}
     print "    "; print idx_arr.join("    "); puts ""

@@ -26,9 +26,9 @@ class Player
     count == 0
   end
 
-  def generate_enemy_boards(all_players, board)
+  def create_enemy_boards(all_players, board)
     all_players.each do |player|
-      @enemy_boards[player] = Board.new(board) unless player == self
+      @enemy_boards[player.name] = Board.new(board) unless player == self
     end
   end
 
