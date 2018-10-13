@@ -6,7 +6,7 @@ class ComputerPlayer < Player
   def initialize (name, board)
     @name = name
     @board = Board.new(board)
-    @past_attack_coord = []
+    @attack_log = []
   end
 
   def get_attack
@@ -16,7 +16,7 @@ class ComputerPlayer < Player
       col = rand(0...@board.num_cols)
       coord = [row, col]
     end
-    @past_attack_coord.push(coord)
+    @past_attack_coord.push([coord])
     col
   end
 
