@@ -6,12 +6,6 @@ require_relative "./modules/optimization.rb"
 class Player
   attr_reader :name
 
-  def initialize (name, board)
-    @name = name
-    @board = Board.new(board)
-    @enemy_boards = {}
-  end
-
   def count
     @board.reduce(0) { |a,row| a + row.count {|e| e.class == Symbol} }
   end

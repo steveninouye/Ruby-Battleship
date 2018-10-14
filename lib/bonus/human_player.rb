@@ -5,6 +5,15 @@ require_relative "./modules/validation.rb"
 
 class HumanPlayer < Player
 
+  def initialize (name, board)
+    @name = name
+    @board = Board.new(board)
+    @enemy_boards = {}
+  end
+
+  def display_enemy_boards # displays enemy boards to player
+  end
+
   def get_attack
     @board.display
     row = get_num_input(0, @board.num_rows - 1, "What row would you like to attack?")

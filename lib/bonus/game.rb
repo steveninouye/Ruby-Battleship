@@ -95,6 +95,7 @@ class Game
 
   def take_turn
     puts "#{@current_player.name}'s turn"
+    @current_player.display_enemy_boards
     coord = @current_player.get_attack
     attack(coord)
     finish_turn
