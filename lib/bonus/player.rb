@@ -15,7 +15,7 @@ class Player
   def post_attack(coord)
     element = @board[coord]
     @board[coord] = "X"
-    element.class == Symbol ? [self, :hit] : [self, :miss]
+    element.class == Symbol ? :hit : :miss
   end
 
   def count
