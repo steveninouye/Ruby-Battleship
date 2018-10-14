@@ -24,13 +24,13 @@ class Game
   include Num_Input_Validation
 
   def attack(coord)
+    attack_log = {}
     @players.each_with_index do |player,idx|
-       = player.post_attack(coord)
-      if player.defeated?
-        puts "#{player.name} was destroyed!"
-        @players.delete_at(idx)
-      end
+      result = player.post_attack(coord)
+      attack_log[player] = result
+      destroy(player) if player.defeated?
     end
+    @current_player.log_attack(attack_log)
   end
 
   def create_comp_players
@@ -61,6 +61,11 @@ class Game
     puts "#{name} was added"
     @players[-1].place_ships
     puts "#{name} placed their ships"
+  end
+
+  def destroy(player)
+    puts "#{player.name} was destroyed"
+    @players.delete(player)
   end
 
   def finish_turn

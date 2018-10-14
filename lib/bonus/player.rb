@@ -12,18 +12,8 @@ class Player
     @enemy_boards = {}
   end
 
-  def post_attack(coord)
-    element = @board[coord]
-    @board[coord] = "X"
-    element.class == Symbol ? :hit : :miss
-  end
-
   def count
     @board.reduce(0) { |a,row| a + row.count {|e| e.class == Symbol} }
-  end
-
-  def defeated?
-    count == 0
   end
 
   def create_enemy_boards(all_players, board)
@@ -32,18 +22,32 @@ class Player
     end
   end
 
+  def defeated?
+    count == 0
+  end
+
+  def log_attack(attack_log)
+
+  end
+
   def place_ships
     Board::SHIPS.each do |sym, obj|
       @sym, @ship_name, @size = sym, obj[:name], obj[:size]
       valid_ship_input = false
       until valid_ship_input
-        @start_pos = get_start_pos # [start_pos, direction]
+        @start_pos = get_start_pos
         @direction = get_direction
         valid_ship_input = validate_ship_input
         place_ship(valid_ship_input) if valid_ship_input
       end
     end
     garbage_collect
+  end
+
+  def post_attack(coord)
+    element = @board[coord]
+    @board[coord] = "X"
+    element.class == Symbol ? :hit : :miss
   end
 
   private
