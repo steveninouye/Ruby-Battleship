@@ -22,6 +22,7 @@ class Game
   private
 
   include Num_Input_Validation
+  include Player_Name_Validation
 
   def attack(coord)
     attack_log = {}
@@ -45,7 +46,7 @@ class Game
     num_human_players = get_num_input(0, 10, "How many *Human Players* will be playing?")
     num_human_players.times do |el|
       puts "Player #{el + 1} name:"
-      player_name = gets.chomp
+      player_name = valid_name
       create_player(player_name, HumanPlayer)
     end
   end

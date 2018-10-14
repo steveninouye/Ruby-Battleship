@@ -64,3 +64,13 @@ module Ship_Pos_Validation
     [@start_pos, @direction]
   end
 end
+
+module Player_Name_Validation
+  def get_valid_name
+    valid_name = nil
+    until valid_name
+      valid_name = gets.chomp unless @players.any? { |player| player.name == name }
+    end
+    valid_name
+  end
+end
