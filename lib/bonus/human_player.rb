@@ -11,6 +11,12 @@ class HumanPlayer < Player
     @enemy_boards = {}
   end
 
+  def create_enemy_boards(all_players, board)
+    all_players.each do |player|
+      @enemy_boards[player.name] = Board.new(board) unless player == self
+    end
+  end
+
   def display_enemy_boards # displays enemy boards to player
   end
 
@@ -19,6 +25,13 @@ class HumanPlayer < Player
     row = get_num_input(0, @board.num_rows - 1, "What row would you like to attack?")
     col = get_num_input(0, @board.num_cols - 1, "What column would you like to attack?")
     [row, col]
+  end
+
+  def log_attack(attack_log, coord)
+    attack_log.each do |name, res|
+      mark = res == :hit ? "X" : "O"
+      @enemy_boards[name][coord] = mark
+    end
   end
 
   private

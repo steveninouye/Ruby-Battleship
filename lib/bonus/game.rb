@@ -28,10 +28,10 @@ class Game
     attack_log = {}
     @players.each_with_index do |player,idx|
       result = player.post_attack(coord)
-      attack_log[player.name] = {:coord => coord, :result => result}
+      attack_log[player.name] = result
       destroy(player) if player.defeated?
     end
-    @current_player.log_attack(attack_log)
+    @current_player.log_attack(attack_log, coord)
   end
 
   def create_comp_players
