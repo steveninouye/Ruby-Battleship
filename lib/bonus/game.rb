@@ -44,9 +44,8 @@ class Game
 
   def create_human_players
     num_human_players = get_num_input(0, 10, "How many *Human Players* will be playing?")
-    num_human_players.times do |el|
-      puts "Player #{el + 1} name:"
-      player_name = valid_name
+    num_human_players.times do |n|
+      player_name = get_valid_name(n)
       create_player(player_name, HumanPlayer)
     end
   end

@@ -1,3 +1,17 @@
+module Direction_Validation
+  def get_direction
+    direction = nil
+    while true
+      print "What direction would you like your ship?\nup(u), down(d), left(l), right(r)\n=> "
+      input = gets.chomp
+      direction = input if input.length == 1 && "udlr".include?(input)
+      break if direction
+      puts "INVALID INPUT::Enter a valid direction u/d/l/r"
+    end
+    direction
+  end
+end
+
 module Num_Input_Validation
   def get_num_input(min, max, str)
     num = nil
@@ -12,17 +26,22 @@ module Num_Input_Validation
   end
 end
 
-module Direction_Validation
-  def get_direction
-    direction = nil
+module Player_Name_Validation
+  def get_valid_name(n)
     while true
-      print "What direction would you like your ship?\nup(u), down(d), left(l), right(r)\n=> "
+      puts "Player #{n + 1} name:"
       input = gets.chomp
-      direction = input if input.length == 1 && "udlr".include?(input)
-      break if direction
-      puts "INVALID INPUT::Enter a valid direction u/d/l/r"
+      if valid_name?(input)
+        valid_name = input
+        break
+      end
+      puts "Player name exists or invalid::Choose a different name"
     end
-    direction
+    valid_name
+  end
+
+  def valid_name?(name)
+    !@players.any? { |player| player.name == name } && !name.include?("Computer")
   end
 end
 
@@ -62,15 +81,5 @@ module Ship_Pos_Validation
       end
     end
     [@start_pos, @direction]
-  end
-end
-
-module Player_Name_Validation
-  def get_valid_name
-    valid_name = nil
-    until valid_name
-      valid_name = gets.chomp unless @players.any? { |player| player.name == name }
-    end
-    valid_name
   end
 end
