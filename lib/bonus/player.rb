@@ -56,8 +56,11 @@ class Player
   include Coordinate_Calculator
   include Memory_Cleanup
 
-  def log_attack(coord, result)
-    @attack_log << {:coord => coord, :result => result}
+  def log_attack(attack_log)
+    attack_log.each do |name, res|
+      mark = res[:result] == :hit ? "X" : "O"
+      @enemy_boards[name][res[:coord]] = mark
+    end
   end
 
   def place_ship(input)
