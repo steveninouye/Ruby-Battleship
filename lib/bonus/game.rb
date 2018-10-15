@@ -31,7 +31,7 @@ class Game
       attack_log[player.name] = result
       destroy(player) if player.defeated?
     end
-    @current_player.log_attack(attack_log)
+    @current_player.log_attack(attack_log, coord)
   end
 
   def create_comp_players
@@ -95,6 +95,7 @@ class Game
 
   def take_turn
     puts "#{@current_player.name}'s turn"
+    @current_player.display_enemy_boards
     coord = @current_player.get_attack
     attack(coord)
     finish_turn

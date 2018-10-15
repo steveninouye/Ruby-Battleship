@@ -6,20 +6,8 @@ require_relative "./modules/optimization.rb"
 class Player
   attr_reader :name
 
-  def initialize (name, board)
-    @name = name
-    @board = Board.new(board)
-    @enemy_boards = {}
-  end
-
   def count
     @board.reduce(0) { |a,row| a + row.count {|e| e.class == Symbol} }
-  end
-
-  def create_enemy_boards(all_players, board)
-    all_players.each do |player|
-      @enemy_boards[player.name] = Board.new(board) unless player == self
-    end
   end
 
   def defeated?
@@ -55,10 +43,6 @@ class Player
   include Ship_Pos_Validation
   include Coordinate_Calculator
   include Memory_Cleanup
-
-  def log_attack(coord, result)
-    @attack_log << {:coord => coord, :result => result}
-  end
 
   def place_ship(input)
     @size.times do |n|
