@@ -1,6 +1,6 @@
 require_relative "./computer_player.rb"
 require_relative "./human_player.rb"
-require_relative "./modules/validation.rb"
+require_relative "../modules/validation.rb"
 require "byebug"
 
 class Game

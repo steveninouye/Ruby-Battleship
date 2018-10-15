@@ -1,6 +1,6 @@
 require_relative "./player.rb"
 require_relative "./board.rb"
-require_relative "./modules/validation.rb"
+require_relative "../modules/validation.rb"
 
 
 class HumanPlayer < Player

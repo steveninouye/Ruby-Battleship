@@ -1,7 +1,7 @@
 require_relative "./board.rb"
-require_relative "./modules/validation.rb"
-require_relative "./modules/calculator.rb"
-require_relative "./modules/optimization.rb"
+require_relative "../modules/validation.rb"
+require_relative "../modules/calculator.rb"
+require_relative "../modules/optimization.rb"
 
 class Player
   attr_reader :name
