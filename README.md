@@ -1,5 +1,21 @@
 # Battleship
 
+## To Play
+
+The game has been recreated and can be found in the `./lib/bonus` directory and can be played by running the `./lib/bonus/play_game.rb` file with ruby.
+
+A maximum of 10 players can play at each time and a maximum of 10 computers can be added as well.  This can be set up during the beginning phase of the game.
+
+When a player attacks, the attack will hit all players at that coordinate.  Last man standing wins.
+
+Good Luck!
+
+
+---
+---
+---
+# Below are the original instructions
+
 Let's write a basic implementation of the classic game
 [Battleship][wiki-battleship]!
 
