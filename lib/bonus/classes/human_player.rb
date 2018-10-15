@@ -17,7 +17,10 @@ class HumanPlayer < Player
     end
   end
 
-  def display_enemy_boards # displays enemy boards to player
+  def display_enemy_boards
+    enemy_boards.each do |name, board|
+      board.display
+    end
   end
 
   def get_attack

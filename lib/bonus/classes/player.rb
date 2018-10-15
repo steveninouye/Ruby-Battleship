@@ -14,10 +14,6 @@ class Player
     count == 0
   end
 
-  def log_attack(attack_log)
-
-  end
-
   def place_ships
     Board::SHIPS.each do |sym, obj|
       @sym, @ship_name, @size = sym, obj[:name], obj[:size]

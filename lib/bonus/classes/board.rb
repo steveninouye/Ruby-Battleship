@@ -12,6 +12,16 @@ class Board
     @ships = SHIPS.keys
   end
 
+  def get_all_coord_val
+    result = {}
+    @board.each_with_index do |row, row_idx|
+      row.each_with_index do |el, col_idx|
+        result[row_idx, col_idx] = el
+      end
+    end
+    result
+  end
+
   def num_rows
     @board.length
   end
