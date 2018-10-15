@@ -13,9 +13,7 @@ class ComputerPlayer < Player
     @next_attack_coord = get_random_coord
   end
 
-  def display_enemy_boards # tells computer where to target next
-    # find coordinate with most hits && available adjacent spots to target
-    # hit adjacent spot
+  def display_enemy_boards
     @next_attack_coord = nil
     hits = @board.get_all_coord_val.sort { |a, b| a[1] <=> b[1] }
     hits.reject! { |el| el[1] == " " }
@@ -61,9 +59,20 @@ class ComputerPlayer < Player
   end
 
   def find_next_attack(coords)
-    while coords.length > 0
+    attack_pos = nil
+    while attack_pos || coords.length > 0
       coord = coords.shuffle!.shift
-      
+      attack_pos = get_attack_coord(coord)
+    end
+    attack_pos
+  end
+
+  def get_attack_coord(coord)
+    row, col = coord
+    surrounding_points = [[row - 1, col], [row + 1, col], [row, col - 1], [row, col + 1]]
+    surrounding_points.shuffle!
+    surrounding_points.each do |point|
+      return point if @board[point] == " "
     end
     nil
   end

@@ -53,12 +53,6 @@ class Board
     end
   end
 
-  def ship_destroyed?
-    # find symbol that was attacked
-    # see if there are any of the symbols left on the board
-    # TODO
-  end
-
   private
 
   def create_board(board)
