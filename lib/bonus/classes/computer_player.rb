@@ -15,13 +15,16 @@ class ComputerPlayer < Player
   end
 
   def display_enemy_boards
+    @enemy_boards.display ################
     @next_attack_coord = nil
-    # byebug
-    hits = @enemy_boards.get_all_coord_val.sort { |a, b| a[1] <=> b[1] }
-    hits.reject! { |el| el[1] == " " }
+    hits = @enemy_boards.get_all_coord_val.reject { |k,v| v == " " }
+    hits = hits.sort { |a, b| a[1] <=> b[1] }
     until @next_attack_coord
       if hits.length == 0
-        @next_attack_coord = get_random_coord
+        until @next_attack_coord
+          coord = get_random_coord
+          @next_attack_coord = coord if @board[coord] == " "
+        end
       else
         highest_num_hits = hits.last[1]
         coords = hits.reduce([]) do |a,c|
@@ -62,7 +65,7 @@ class ComputerPlayer < Player
 
   def find_next_attack(coords)
     attack_pos = nil
-    while attack_pos || coords.length > 0
+    while !attack_pos && coords.length > 0
       coord = coords.shuffle!.shift
       attack_pos = get_attack_coord(coord)
     end
@@ -71,6 +74,7 @@ class ComputerPlayer < Player
 
   def get_attack_coord(coord)
     row, col = coord
+    # byebug
     surrounding_points = [[row - 1, col], [row + 1, col], [row, col - 1], [row, col + 1]]
     surrounding_points.shuffle!
     surrounding_points.each do |point|

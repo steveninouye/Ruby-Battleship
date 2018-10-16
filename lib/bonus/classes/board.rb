@@ -39,13 +39,14 @@ class Board
   end
 
   def [](coord)
-    row_num, col_num = coord
-    @board[row_num][col_num]
+    row, col = coord
+    return nil if !(0...num_rows).include?(row) || !(0...num_cols).include?(col)
+    @board[row][col]
   end
 
   def []=(coord, mark)
-    row_num, col_num = coord
-    @board[row_num][col_num] = mark
+    row, col = coord
+    @board[row][col] = mark
   end
 
   def reduce(acc, &prc)
