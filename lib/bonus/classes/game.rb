@@ -69,10 +69,10 @@ class Game
   end
 
   def clear_screen(str)
-    # if @current_player.class == HumanPlayer
+    if @current_player.class == HumanPlayer
       print "Press ENTER #{str}"
       gets
-    # end
+    end
     system "clear"
   end
 
@@ -81,10 +81,8 @@ class Game
   end
 
   def game_setup
-    num_rows = get_num_input(5, 100, "How many rows on the board?")
-    num_columns = get_num_input(5, 100, "How many columns on the board?")
-    # num_rows = get_num_input(10, 100, "How many rows on the board?")
-    # num_columns = get_num_input(10, 100, "How many columns on the board?")
+    num_rows = get_num_input(10, 100, "How many rows on the board?")
+    num_columns = get_num_input(10, 100, "How many columns on the board?")
     @board = [num_rows, num_columns]
     create_human_players
     create_comp_players

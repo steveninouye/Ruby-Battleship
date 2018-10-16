@@ -15,7 +15,6 @@ class ComputerPlayer < Player
   end
 
   def display_enemy_boards
-    @enemy_boards.display ################
     @next_attack_coord = nil
     hits = @enemy_boards.get_all_coord_val.reject { |k,v| v == " " }
     hits = hits.sort { |a, b| a[1] <=> b[1] }
@@ -74,7 +73,6 @@ class ComputerPlayer < Player
 
   def get_attack_coord(coord)
     row, col = coord
-    # byebug
     surrounding_points = [[row - 1, col], [row + 1, col], [row, col - 1], [row, col + 1]]
     surrounding_points.shuffle!
     surrounding_points.each do |point|
