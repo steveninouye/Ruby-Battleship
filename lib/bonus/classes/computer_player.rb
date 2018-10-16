@@ -16,7 +16,7 @@ class ComputerPlayer < Player
 
   def display_enemy_boards
     @next_attack_coord = nil
-    byebug
+    # byebug
     hits = @enemy_boards.get_all_coord_val.sort { |a, b| a[1] <=> b[1] }
     hits.reject! { |el| el[1] == " " }
     until @next_attack_coord

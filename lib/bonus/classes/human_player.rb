@@ -34,6 +34,7 @@ class HumanPlayer < Player
 
   def log_attack(attack_log, coord)
     attack_log.each do |name, res|
+      puts "#{name}::#{res}"
       mark = res == :hit ? "X" : "O"
       @enemy_boards[name][coord] = mark
     end
