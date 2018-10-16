@@ -68,8 +68,8 @@ class Game
     @players.delete(player)
   end
 
-  def finish_turn
-    print "Press ENTER to complete your turn"; gets
+  def clear_screen(str)
+    print "Press ENTER #{str}"; gets
     system "clear"
   end
 
@@ -95,9 +95,10 @@ class Game
 
   def take_turn
     puts "#{@current_player.name}'s turn"
+    clear_screen("to start your turn")
     @current_player.display_enemy_boards
     coord = @current_player.get_attack
     attack(coord)
-    finish_turn
+    clear_screen("to complete your turn")
   end
 end

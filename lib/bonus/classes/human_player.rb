@@ -18,12 +18,14 @@ class HumanPlayer < Player
   end
 
   def display_enemy_boards
-    enemy_boards.each do |name, board|
+    @enemy_boards.each do |name, board|
+      puts "ENEMY::#{name}"
       board.display
     end
   end
 
   def get_attack
+    puts "Your Territory"
     @board.display
     row = get_num_input(0, @board.num_rows - 1, "What row would you like to attack?")
     col = get_num_input(0, @board.num_cols - 1, "What column would you like to attack?")

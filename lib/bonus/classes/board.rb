@@ -16,7 +16,7 @@ class Board
     result = {}
     @board.each_with_index do |row, row_idx|
       row.each_with_index do |el, col_idx|
-        result[row_idx, col_idx] = el
+        result[[row_idx, col_idx]] = el
       end
     end
     result
@@ -35,6 +35,7 @@ class Board
     @board[0].each_index {|i| idx_arr.push(i)}
     print "    "; print idx_arr.join("    "); puts ""
     @board.each_with_index {|row, i| puts "#{i} #{row}" }
+    puts " "
   end
 
   def [](coord)

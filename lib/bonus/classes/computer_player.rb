@@ -1,5 +1,6 @@
 require_relative "./player.rb"
 require_relative "./board.rb"
+require "byebug"
 
 class ComputerPlayer < Player
 
@@ -15,7 +16,8 @@ class ComputerPlayer < Player
 
   def display_enemy_boards
     @next_attack_coord = nil
-    hits = @board.get_all_coord_val.sort { |a, b| a[1] <=> b[1] }
+    byebug
+    hits = @enemy_boards.get_all_coord_val.sort { |a, b| a[1] <=> b[1] }
     hits.reject! { |el| el[1] == " " }
     until @next_attack_coord
       if hits.length == 0
@@ -72,7 +74,7 @@ class ComputerPlayer < Player
     surrounding_points = [[row - 1, col], [row + 1, col], [row, col - 1], [row, col + 1]]
     surrounding_points.shuffle!
     surrounding_points.each do |point|
-      return point if @board[point] == " "
+      return point if @enemy_boards[point] == " "
     end
     nil
   end
